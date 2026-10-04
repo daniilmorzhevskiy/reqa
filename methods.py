@@ -1,3 +1,4 @@
+import json
 # user = {
 #     "id": 1,
 #     "name": "Alice",
@@ -75,7 +76,7 @@
 #         {"id": 4, "name": "David", "active": True}
 #     ]
 # }
-
+            #  ---- D-2 ---- #
 # def get_active_user_names(response):
 #     active_users_name = []
 #     for user in response['users']:
@@ -106,18 +107,56 @@
 
 # failed_tests = [test["name"] for test in test_cases if test["status"] == "failed"]
 # print(failed_tests)
-import json
+# import json
 
-def transform_test_data(input_file, output_file):
+# def transform_test_data(input_file, output_file):
 
-    with open(input_file, 'r') as f:
-        data = json.load(f)
-        print("data:", data)
+#     with open(input_file, 'r') as f:
+#         data = json.load(f)
+#         print("data:", data)
 
-    for item in data:
-        item["status"] = item["status"].upper()
+#     for item in data:
+#         item["status"] = item["status"].upper()
 
-    with open(output_file, 'w') as f:
-        json.dump(data, f, indent=4)
+#     with open(output_file, 'w') as f:
+#         json.dump(data, f, indent=4)
 
-transform_test_data("test_input.json", "test_output.json")
+# transform_test_data("test_input.json", "test_output.json")
+
+import requests
+# response = requests.get("https://jsonplaceholder.typicode.com/users/1")
+
+# # print(response.status_code)
+# # print(response.headers)
+# # print(response.text)
+# # print(response.json())
+
+
+# # user = response.json()
+# # print(user["id"])
+# # print(user["name"])
+# # print(user["email"])
+
+# params = {"completed": True}
+# response = requests.get("https://jsonplaceholder.typicode.com/todos", params=params)
+# print(response.status_code)
+
+new_user = {
+    "name": "John",
+    "email": "john@example.com",
+    "body": "This is a test user"
+}
+
+response = requests.post("https://jsonplaceholder.typicode.com/posts", json=new_user)
+print(response.status_code)
+print(response.json())
+
+try:
+    response = requests.get("https://jsonplaceholder.typicode.com/users/666")
+    response.raise_for_status()  # Raise an exception for HTTP errors
+    data = response.json()
+    print(data)
+except requests.exceptions.HTTPError as err:
+    print(f"HTTP error: {err}")
+except requests.exceptions.RequestException as err:
+    print(f"Request error: {err}")
