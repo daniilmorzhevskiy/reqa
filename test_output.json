@@ -1,0 +1,10 @@
+[
+    {
+        "name": "test1",
+        "status": "PASSED"
+    },
+    {
+        "name": "test2",
+        "status": "FAILED"
+    }
+]
